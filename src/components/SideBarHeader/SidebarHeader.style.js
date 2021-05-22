@@ -24,7 +24,6 @@ const ButtonHeader = styled.div`
   cursor:pointer;
 `
 
-
 export {
   Header,
   AvatarImage,

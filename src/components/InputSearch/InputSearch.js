@@ -1,10 +1,15 @@
 import React from 'react'
+import SearchIcon from '@material-ui/icons/Search';
+import { InputContainer, InputWrapper, Input } from './InputSearch.style';
 
 const InputSearch = () => {
   return (
-    <div>
-      Input
-    </div>
+    <InputContainer>
+      <InputWrapper>
+        <SearchIcon fontSize="small" style={{ color: '#919191' }} />
+        <Input type="search" placeholder="Procurar  ou começar uma nova conversa" />
+      </InputWrapper>
+    </InputContainer>
   )
 }
 
