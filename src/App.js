@@ -4,6 +4,7 @@ import InputSearch from './components/InputSearch/InputSearch'
 import ChatList from './components/ChatList/ChatList'
 import { AppWindow, ContentArea, SideBar } from './styles/layout/Containers.style'
 import ChatListItem from './components/ChatListItem/ChatListItem'
+import ChatIntro from './components/ChatIntro/ChatIntro'
 
 const App = () => {
 
@@ -21,6 +22,7 @@ const App = () => {
         </ChatList>
       </SideBar>
       <ContentArea>
+        <ChatIntro/>
       </ContentArea>
     </AppWindow>
   )

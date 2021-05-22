@@ -12,7 +12,9 @@ const SideBar = styled.aside`
   flex-direction: column;
   border-right: 1px solid #ddd;
 `
-const ContentArea = styled.div``
+const ContentArea = styled.div`
+  flex:1;
+`
 
 export {
   AppWindow,
