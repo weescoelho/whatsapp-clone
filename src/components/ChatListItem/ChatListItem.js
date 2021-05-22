@@ -1,13 +1,13 @@
 import React from 'react'
 import { ChatWrapper, Avatar, ChatContent, ContentLine, ChatName, ChatDate, ChatLastMessage } from './ChatListItem.style'
 
-const ChatListItem = () => {
+const ChatListItem = ({ onClick, active, data }) => {
   return (
-    <ChatWrapper>
-      <Avatar src="https://www.w3schools.com/howto/img_avatar.png"/>
+    <ChatWrapper onClick={onClick} active={active}>
+      <Avatar src={data.image} />
       <ChatContent>
         <ContentLine>
-          <ChatName>Weslley Coelho</ChatName>
+          <ChatName>{data.title}</ChatName>
           <ChatDate>19:00</ChatDate>
         </ContentLine>
         <ContentLine>

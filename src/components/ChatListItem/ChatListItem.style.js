@@ -5,6 +5,7 @@ const ChatWrapper = styled.div`
  cursor: pointer;
  align-items: center;
  height: 70px;
+ background:${({active, theme}) => active ? theme.colors.light.bgPrimary : '#FFF'};
  &:hover{
    background-color:${({ theme }) => theme.colors.light.bgChatListHover};
  }
