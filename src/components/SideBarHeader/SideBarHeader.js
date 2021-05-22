@@ -1,14 +1,26 @@
 import React from 'react'
-import styled from 'styled-components'
+import { AvatarImage, ButtonHeader, ButtonsWrapper, Header } from './SidebarHeader.style'
 
-const AvatarImage = styled.img``
-const ButtonsWrapper = styled.div``
+import DonutLargeIcon from '@material-ui/icons/DonutLarge';
+import ChatIcon from '@material-ui/icons/Chat';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const SideBarHeader = () => {
   return (
-    <header>
+    <Header>
       <AvatarImage src="https://www.w3schools.com/howto/img_avatar.png" alt="" />
-    </header>
+      <ButtonsWrapper>
+        <ButtonHeader>
+          <DonutLargeIcon style={{ color: '#919191' }} />
+        </ButtonHeader>
+        <ButtonHeader>
+          <ChatIcon style={{ color: '#919191' }} />
+        </ButtonHeader>
+        <ButtonHeader>
+          <MoreVertIcon style={{ color: '#919191' }} />
+        </ButtonHeader>
+      </ButtonsWrapper>
+    </Header>
   )
 }
 
