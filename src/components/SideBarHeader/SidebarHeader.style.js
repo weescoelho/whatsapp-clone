@@ -5,6 +5,7 @@ const Header = styled.header`
   justify-content: space-between;
   align-items:center;
   padding: 0 15px;
+  background-color: ${({theme}) => theme.colors.light.bgPrimary};
 `
 const AvatarImage = styled.img`
   width: 40px;
