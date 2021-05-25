@@ -24,34 +24,93 @@ import MicIcon from "@material-ui/icons/Mic";
 import EmojiPicker from "emoji-picker-react";
 import MessageItem from "../MessageItem/MessageItem";
 
-
-const ChatWindow = ({user}) => {
+const ChatWindow = ({ user }) => {
   const [emojiOpen, setEmojiOpen] = React.useState(false);
   const [text, setText] = React.useState("");
   const [listening, setListening] = React.useState(false);
-  const [list , setList] = React.useState([
-    {author: 12, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
-    {author: 123, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
-    {author: 1234, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
-    {author: 12, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
-    {author: 123, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
-    {author: 1234, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
-    {author: 12, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
-    {author: 123, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
-    {author: 1234, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
-    {author: 12, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
-    {author: 123, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
-    {author: 1234, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
-    {author: 12, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
-    {author: 123, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
-    {author: 1234, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
-    {author: 12, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
-    {author: 123, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
-    {author: 1234, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
-
+  const [list, setList] = React.useState([
+    {
+      author: 12,
+      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
+    },
+    {
+      author: 123,
+      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
+    },
+    {
+      author: 1234,
+      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
+    },
+    {
+      author: 12,
+      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
+    },
+    {
+      author: 123,
+      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
+    },
+    {
+      author: 1234,
+      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
+    },
+    {
+      author: 12,
+      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
+    },
+    {
+      author: 123,
+      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
+    },
+    {
+      author: 1234,
+      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
+    },
+    {
+      author: 12,
+      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
+    },
+    {
+      author: 123,
+      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
+    },
+    {
+      author: 1234,
+      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
+    },
+    {
+      author: 12,
+      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
+    },
+    {
+      author: 123,
+      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
+    },
+    {
+      author: 1234,
+      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
+    },
+    {
+      author: 12,
+      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
+    },
+    {
+      author: 123,
+      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
+    },
+    {
+      author: 1234,
+      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
+    },
   ]);
-  
- 
+
+  const body = React.useRef();
+
+  //Se a area de scroll for maior que o proprio elemento, o conteudo será rolado para baixo.
+  React.useEffect(() => {
+    if(body.current.scrollHeight > body.current.offsetHeight){
+      body.current.scrollTop = body.current.scrollHeight - body.current.offsetHeight
+    }
+  }, [list]);
 
   let recognition = null;
   let SpeechRecognition =
@@ -80,8 +139,8 @@ const ChatWindow = ({user}) => {
         setListening(false);
       };
       recognition.onresult = (event) => {
-        setText(event.results[0][0].transcript)
-      }
+        setText(event.results[0][0].transcript);
+      };
       recognition.start();
     }
   }
@@ -108,13 +167,9 @@ const ChatWindow = ({user}) => {
           </ButtonsWrapper>
         </HeaderButtonsContainer>
       </Header>
-      <Body>
+      <Body ref={body}>
         {list.map((item, key) => (
-          <MessageItem
-            key={key}
-            data={item}
-            user={user}
-          />
+          <MessageItem key={key} data={item} user={user} />
         ))}
       </Body>
       <EmojiArea state={emojiOpen}>
@@ -147,7 +202,10 @@ const ChatWindow = ({user}) => {
           {text ? (
             <SendIcon style={{ color: "#919191" }} onClick={handleSendClick} />
           ) : (
-            <MicIcon style={{ color: listening ? "#126ece" : "#919191" }} onClick={handleMicClick} />
+            <MicIcon
+              style={{ color: listening ? "#126ece" : "#919191" }}
+              onClick={handleMicClick}
+            />
           )}
         </ButtonsWrapperFooter>
       </Footer>
