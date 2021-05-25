@@ -25,11 +25,33 @@ import EmojiPicker from "emoji-picker-react";
 import MessageItem from "../MessageItem/MessageItem";
 
 
-const ChatWindow = () => {
+const ChatWindow = ({user}) => {
   const [emojiOpen, setEmojiOpen] = React.useState(false);
   const [text, setText] = React.useState("");
   const [listening, setListening] = React.useState(false);
-  const [list , setList] = React.useState([{},{},{}]);
+  const [list , setList] = React.useState([
+    {author: 12, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
+    {author: 123, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
+    {author: 1234, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
+    {author: 12, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
+    {author: 123, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
+    {author: 1234, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
+    {author: 12, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
+    {author: 123, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
+    {author: 1234, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
+    {author: 12, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
+    {author: 123, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
+    {author: 1234, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
+    {author: 12, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
+    {author: 123, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
+    {author: 1234, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
+    {author: 12, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
+    {author: 123, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
+    {author: 1234, body:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus '},
+
+  ]);
+  
+ 
 
   let recognition = null;
   let SpeechRecognition =
@@ -91,6 +113,7 @@ const ChatWindow = () => {
           <MessageItem
             key={key}
             data={item}
+            user={user}
           />
         ))}
       </Body>

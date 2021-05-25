@@ -1,11 +1,11 @@
 import React from 'react'
 import { MessageDate, Message, MessageLine, MessageText } from './MessageItem.style'
 
-const MessageItem = ({data}) => {
+const MessageItem = ({data, user}) => {
   return (
-    <MessageLine>
-      <Message>
-        <MessageText>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat perspiciatis voluptatum harum molestias sapiente eveniet excepturi amet magnam dolores unde et necessitatibus, pariatur voluptates iusto deleniti nesciunt quos voluptate optio.</MessageText>
+    <MessageLine style={{justifyContent:user.id === data.author ? 'flex-end' : 'flex-start'}}>
+      <Message style={{backgroundColor:user.id === data.author ? '#DCF8C6' : '#fff'}}>
+        <MessageText>{data.body}</MessageText>
         <MessageDate>19:00</MessageDate>
       </Message>
     </MessageLine>

@@ -31,11 +31,16 @@ const App = () => {
     },
   ]);
   const [activeChat, setActiveChat] = React.useState({});
+  const [user, setUser] = React.useState({
+    id: 1234,
+    avatar: "https://www.blexar.com/avatar.png",
+    name: "Weslley Coelho",
+  });
 
   return (
     <AppWindow>
       <SideBar>
-        <SideBarHeader />
+        <SideBarHeader user={user} />
         <InputSearch />
         <ChatList>
           {chatList.map((chat, key) => (
@@ -49,7 +54,11 @@ const App = () => {
         </ChatList>
       </SideBar>
       <ContentArea>
-        {activeChat.chatId !== undefined ? <ChatWindow /> : <ChatIntro />}
+        {activeChat.chatId !== undefined ? (
+          <ChatWindow user={user} />
+        ) : (
+          <ChatIntro />
+        )}
       </ContentArea>
     </AppWindow>
   );

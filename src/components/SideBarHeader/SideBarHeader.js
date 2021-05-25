@@ -5,10 +5,10 @@ import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-const SideBarHeader = () => {
+const SideBarHeader = ({user}) => {
   return (
     <Header>
-      <AvatarImage src="https://www.w3schools.com/howto/img_avatar.png" alt="" />
+      <AvatarImage src={user.avatar} alt="" />
       <ButtonsWrapper>
         <ButtonHeader>
           <DonutLargeIcon style={{ color: '#919191' }} />
