@@ -26,6 +26,14 @@ import EmojiPicker from "emoji-picker-react";
 const ChatWindow = () => {
   const [emojiOpen, setEmojiOpen] = React.useState(false);
   const [text, setText] = React.useState("");
+  const [listening, setListening] = React.useState(false);
+
+  let recognition = null;
+  let SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (SpeechRecognition !== undefined) {
+    recognition = new SpeechRecognition();
+  }
 
   function handleEmojiClick(event, emojiObject) {
     setText(text + emojiObject.emoji);
@@ -36,9 +44,22 @@ const ChatWindow = () => {
   function handleCloseEmoji() {
     setEmojiOpen(false);
   }
-  
-  function handleSendClick(){}
-  function handleMicClick(){}
+
+  function handleSendClick() {}
+  function handleMicClick() {
+    if (recognition !== null) {
+      recognition.onstart = () => {
+        setListening(true);
+      };
+      recognition.onend = () => {
+        setListening(false);
+      };
+      recognition.onresult = (event) => {
+        setText(event.results[0][0].transcript)
+      }
+      recognition.start();
+    }
+  }
 
   return (
     <Chat>
@@ -93,7 +114,7 @@ const ChatWindow = () => {
           {text ? (
             <SendIcon style={{ color: "#919191" }} onClick={handleSendClick} />
           ) : (
-            <MicIcon  style={{ color: "#919191" }} onClick={handleMicClick} />
+            <MicIcon style={{ color: listening ? "#126ece" : "#919191" }} onClick={handleMicClick} />
           )}
         </ButtonsWrapperFooter>
       </Footer>
