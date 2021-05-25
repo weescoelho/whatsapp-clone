@@ -10,4 +10,11 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 // Inicia o banco de dados.
 const db = firebaseApp.firestore();
 
+// Função que realiza o login no facebook - Abertura do popup
+const facebookPopup = async () => {
+  const provider = new firebase.auth.FacebookAuthProvider();
+  let result = await firebaseApp.auth().signInWithPopup(provider);
+  return result;
+};
 
+export default { facebookPopup };

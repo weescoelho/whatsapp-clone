@@ -12,6 +12,7 @@ import ChatListItem from "./components/ChatListItem/ChatListItem";
 import ChatIntro from "./components/ChatIntro/ChatIntro";
 import ChatWindow from "./components/ChatWindow/ChatWindow";
 import { NewChat } from "./components/NewChat/NewChat";
+import { Login } from "./components/Login/Login";
 
 const App = () => {
   const [chatList, setChatList] = React.useState([
@@ -32,13 +33,19 @@ const App = () => {
     },
   ]);
   const [activeChat, setActiveChat] = React.useState({});
-  const [user, setUser] = React.useState({
-    id: 1234,
-    avatar: "https://www.blexar.com/avatar.png",
-    name: "Weslley Coelho",
-  });
+  const [user, setUser] = React.useState(null);
   const [activeNewChat, setActiveNewChat] = React.useState(false);
 
+  const handleLoginData = async (u) => {
+    let newUser ={
+      id: u.uid,
+      name: u.displayName,
+      avatar: u.photoURL
+    }
+    setUser(newUser);
+  }
+
+  if(user === null) return <Login onReceive={handleLoginData}/>
   return (
     <AppWindow>
       <SideBar>
