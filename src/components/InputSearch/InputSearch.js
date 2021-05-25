@@ -7,7 +7,7 @@ const InputSearch = () => {
     <InputContainer>
       <InputWrapper>
         <SearchIcon fontSize="small" style={{ color: '#919191' }} />
-        <Input type="search" placeholder="Procurar  ou começar uma nova conversa" />
+        <Input type="search" placeholder="Pesquisar  ou começar uma nova conversa" />
       </InputWrapper>
     </InputContainer>
   )
