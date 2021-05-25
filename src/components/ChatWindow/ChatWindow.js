@@ -107,8 +107,9 @@ const ChatWindow = ({ user }) => {
 
   //Se a area de scroll for maior que o proprio elemento, o conteudo será rolado para baixo.
   React.useEffect(() => {
-    if(body.current.scrollHeight > body.current.offsetHeight){
-      body.current.scrollTop = body.current.scrollHeight - body.current.offsetHeight
+    if (body.current.scrollHeight > body.current.offsetHeight) {
+      body.current.scrollTop =
+        body.current.scrollHeight - body.current.offsetHeight;
     }
   }, [list]);
 
