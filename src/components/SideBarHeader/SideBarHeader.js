@@ -5,7 +5,12 @@ import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-const SideBarHeader = ({user}) => {
+const SideBarHeader = ({user, setActiveNewChat}) => {
+
+  function handleNewChat(){
+    setActiveNewChat(true)
+  }
+
   return (
     <Header>
       <AvatarImage src={user.avatar} alt="" />
@@ -14,7 +19,7 @@ const SideBarHeader = ({user}) => {
           <DonutLargeIcon style={{ color: '#919191' }} />
         </ButtonHeader>
         <ButtonHeader>
-          <ChatIcon style={{ color: '#919191' }} />
+          <ChatIcon style={{ color: '#919191' }} onClick={handleNewChat}/>
         </ButtonHeader>
         <ButtonHeader>
           <MoreVertIcon style={{ color: '#919191' }} />

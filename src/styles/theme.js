@@ -6,6 +6,7 @@ export const theme = {
       bgChatList:'#FFF',
       bgChatListHover:'#F5F5F5',
       bgChatIntro:'#F8F9FA',
+      bgHeaderNewChat:'#00BFA5',
       text:'#333',
       textSecondary:'#999'
     }

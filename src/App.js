@@ -11,6 +11,7 @@ import ChatList from "./components/ChatList/ChatList";
 import ChatListItem from "./components/ChatListItem/ChatListItem";
 import ChatIntro from "./components/ChatIntro/ChatIntro";
 import ChatWindow from "./components/ChatWindow/ChatWindow";
+import { NewChat } from "./components/NewChat/NewChat";
 
 const App = () => {
   const [chatList, setChatList] = React.useState([
@@ -36,11 +37,18 @@ const App = () => {
     avatar: "https://www.blexar.com/avatar.png",
     name: "Weslley Coelho",
   });
+  const [activeNewChat, setActiveNewChat] = React.useState(false);
 
   return (
     <AppWindow>
       <SideBar>
-        <SideBarHeader user={user} />
+        <NewChat
+          chatlist={chatList}
+          user={user}
+          activeNewChat={activeNewChat}
+          setActiveNewChat={setActiveNewChat}
+        />
+        <SideBarHeader user={user} setActiveNewChat={setActiveNewChat} />
         <InputSearch />
         <ChatList>
           {chatList.map((chat, key) => (
