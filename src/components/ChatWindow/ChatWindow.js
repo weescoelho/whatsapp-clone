@@ -22,11 +22,14 @@ import CloseIcon from "@material-ui/icons/Close";
 import SendIcon from "@material-ui/icons/Send";
 import MicIcon from "@material-ui/icons/Mic";
 import EmojiPicker from "emoji-picker-react";
+import MessageItem from "../MessageItem/MessageItem";
+
 
 const ChatWindow = () => {
   const [emojiOpen, setEmojiOpen] = React.useState(false);
   const [text, setText] = React.useState("");
   const [listening, setListening] = React.useState(false);
+  const [list , setList] = React.useState([{},{},{}]);
 
   let recognition = null;
   let SpeechRecognition =
@@ -83,7 +86,14 @@ const ChatWindow = () => {
           </ButtonsWrapper>
         </HeaderButtonsContainer>
       </Header>
-      <Body></Body>
+      <Body>
+        {list.map((item, key) => (
+          <MessageItem
+            key={key}
+            data={item}
+          />
+        ))}
+      </Body>
       <EmojiArea state={emojiOpen}>
         <EmojiPicker
           onEmojiClick={handleEmojiClick}
