@@ -17,4 +17,14 @@ const facebookPopup = async () => {
   return result;
 };
 
-export default { facebookPopup };
+const addUser = async (user) => {
+  await db.collection("users").doc(user.id).set(
+    {
+      name: user.name,
+      avatar: user.avatar,
+    },
+    { merge: true },
+  );
+};
+
+export default { facebookPopup, addUser };

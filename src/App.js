@@ -13,6 +13,7 @@ import ChatIntro from "./components/ChatIntro/ChatIntro";
 import ChatWindow from "./components/ChatWindow/ChatWindow";
 import { NewChat } from "./components/NewChat/NewChat";
 import { Login } from "./components/Login/Login";
+import api from "./api/api";
 
 const App = () => {
   const [chatList, setChatList] = React.useState([
@@ -42,6 +43,7 @@ const App = () => {
       name: u.displayName,
       avatar: u.photoURL
     }
+    await api.addUser(newUser)
     setUser(newUser);
   }
 
