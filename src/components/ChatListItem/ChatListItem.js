@@ -12,7 +12,7 @@ const ChatListItem = ({ onClick, active, data }) => {
         </ContentLine>
         <ContentLine>
           <ChatLastMessage>
-            <p>Lorem ipsum dolor sit ?</p>
+            <p>{data.lastMessage}</p>
           </ChatLastMessage>
         </ContentLine>
       </ChatContent>
