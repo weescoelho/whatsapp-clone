@@ -27,4 +27,20 @@ const addUser = async (user) => {
   );
 };
 
+const getContactList = async (userId) => {
+  let list = [];
+  let results = await db.collection('users').get();
+  results.forEach(result => {
+    let data = result.data();
+    if(result.id !== userId){
+      list.push({
+        id: result.id,
+        name:data.name,
+        avatar:data.avatar
+      })
+    }
+  })
+  return list;
+}
+
 export default { facebookPopup, addUser };
