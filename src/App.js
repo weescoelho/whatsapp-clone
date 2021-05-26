@@ -29,6 +29,17 @@ const App = () => {
     }
   }, [])
 
+
+  React.useEffect(() => {
+    const getChatList = () => {
+      if(user !== null){
+        let unsub = api.onChatList(user.id, setChatList)
+        return unsub
+      }
+    }
+    getChatList();
+}, [])
+
   const handleLoginData = async (u) => {
     let newUser ={
       id: u.uid,
