@@ -12,7 +12,6 @@ import {
 const ChatListItem = ({ onClick, active, data }) => {
 
   const [time,setTime] = React.useState('')
-  console.log(data)
   React.useEffect(() => {
     const getDate = () => {
       if(data.lastMessageDate > 0){
