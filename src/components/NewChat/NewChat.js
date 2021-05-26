@@ -1,33 +1,28 @@
 import React from "react";
 import styled from "styled-components";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import api from "../../api/api";
 
-export const NewChat = ({ activeNewChat, setActiveNewChat }) => {
-  const [list, setList] = React.useState([
-    {
-      id: 123,
-      avatar: "https://www.w3schools.com/howto/img_avatar.png",
-      name: "Joao Pé de Feijão",
-    },
-    {
-      id: 123,
-      avatar: "https://www.w3schools.com/howto/img_avatar.png",
-      name: "Joao Pé de Feijão",
-    },
-    {
-      id: 123,
-      avatar: "https://www.w3schools.com/howto/img_avatar.png",
-      name: "Joao Pé de Feijão",
-    },
-    {
-      id: 123,
-      avatar: "https://www.w3schools.com/howto/img_avatar.png",
-      name: "Joao Pé de Feijão",
-    },
-  ]);
+export const NewChat = ({ user,activeNewChat, setActiveNewChat }) => {
+  const [list, setList] = React.useState([]);
+
+  React.useEffect(()=> {
+   const getList = async () => {
+    if(user !== null){
+      let results = await api.getContactList(user.id)
+      setList(results)
+    }
+   }
+   getList();
+  }, [user])
 
   function handleReturnNewChat(){
     setActiveNewChat(false)
+  }
+
+  const addNewChat = async (contact) => {
+    await api.addNewChat(user,contact)
+    handleReturnNewChat()
   }
 
   return (
@@ -40,7 +35,7 @@ export const NewChat = ({ activeNewChat, setActiveNewChat }) => {
       </Head>
       <List>
         {list.map((item, key) => (
-          <NewChatItem key={key}>
+          <NewChatItem onClick={() => addNewChat(item)} key={key}>
             <Avatar src={item.avatar} alt="Avatar" />
             <NewChatName>{item.name}</NewChatName>
           </NewChatItem>

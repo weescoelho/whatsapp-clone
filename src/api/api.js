@@ -43,4 +43,27 @@ const getContactList = async (userId) => {
   return list;
 }
 
-export default { facebookPopup, addUser };
+const addNewChat = async (user,contact) => {
+  let newChat = await db.collection('chats').add({
+    messages:[],
+    users:[user.id, contact.id]
+  })
+  db.collection('users').doc(user.id).update({
+    chats: firebase.firestore.FieldValue.arrayUnion({
+      chatId: newChat.id,
+      title: contact.name,
+      image: contact.avatar,
+      with: contact.id
+    })
+  })
+  db.collection('users').doc(contact.id).update({
+    chats: firebase.firestore.FieldValue.arrayUnion({
+      chatId: newChat.id,
+      title: user.name,
+      image: user.avatar,
+      with: user.id
+    })
+  })
+}
+
+export default { facebookPopup, addUser, getContactList, addNewChat };
