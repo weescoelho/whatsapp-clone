@@ -23,85 +23,13 @@ import SendIcon from "@material-ui/icons/Send";
 import MicIcon from "@material-ui/icons/Mic";
 import EmojiPicker from "emoji-picker-react";
 import MessageItem from "../MessageItem/MessageItem";
+import api from "../../api/api";
 
-const ChatWindow = ({ user }) => {
+const ChatWindow = ({ user, data }) => {
   const [emojiOpen, setEmojiOpen] = React.useState(false);
   const [text, setText] = React.useState("");
   const [listening, setListening] = React.useState(false);
-  const [list, setList] = React.useState([
-    {
-      author: 12,
-      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
-    },
-    {
-      author: 123,
-      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
-    },
-    {
-      author: 1234,
-      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
-    },
-    {
-      author: 12,
-      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
-    },
-    {
-      author: 123,
-      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
-    },
-    {
-      author: 1234,
-      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
-    },
-    {
-      author: 12,
-      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
-    },
-    {
-      author: 123,
-      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
-    },
-    {
-      author: 1234,
-      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
-    },
-    {
-      author: 12,
-      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
-    },
-    {
-      author: 123,
-      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
-    },
-    {
-      author: 1234,
-      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
-    },
-    {
-      author: 12,
-      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
-    },
-    {
-      author: 123,
-      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
-    },
-    {
-      author: 1234,
-      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
-    },
-    {
-      author: 12,
-      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
-    },
-    {
-      author: 123,
-      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
-    },
-    {
-      author: 1234,
-      body: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus ",
-    },
-  ]);
+  const [list, setList] = React.useState([]);
 
   const body = React.useRef();
 
@@ -112,6 +40,12 @@ const ChatWindow = ({ user }) => {
         body.current.scrollHeight - body.current.offsetHeight;
     }
   }, [list]);
+
+  React.useEffect(() => {
+    setList([]);
+    let unsub = api.onChatContent(data.chatId, setList);
+    return unsub;
+  }, [data.chatId]);
 
   let recognition = null;
   let SpeechRecognition =
@@ -150,11 +84,8 @@ const ChatWindow = ({ user }) => {
     <Chat>
       <Header>
         <HeaderContent>
-          <Avatar
-            src="https://www.w3schools.com/howto/img_avatar.png"
-            alt="chat avatar image"
-          />
-          <ChatName>Weslley Coelho</ChatName>
+          <Avatar src={data.image} alt="chat avatar image" />
+          <ChatName>{data.title}</ChatName>
         </HeaderContent>
         <HeaderButtonsContainer>
           <ButtonsWrapper>

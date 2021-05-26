@@ -22,36 +22,35 @@ const App = () => {
   const [activeNewChat, setActiveNewChat] = React.useState(false);
 
   React.useEffect(() => {
-    const user = window.localStorage.getItem('user')
-    const userJson = JSON.parse(user)
-    if(userJson){
-      setUser(userJson)
+    const user = window.localStorage.getItem("user");
+    const userJson = JSON.parse(user);
+    if (userJson) {
+      setUser(userJson);
     }
-  }, [])
-
+  }, []);
 
   React.useEffect(() => {
     const getChatList = () => {
-      if(user !== null){
-        let unsub = api.onChatList(user.id, setChatList)
-        return unsub
+      if (user !== null) {
+        let unsub = api.onChatList(user.id, setChatList);
+        return unsub;
       }
-    }
+    };
     getChatList();
-}, [user])
+  }, [user]);
 
   const handleLoginData = async (u) => {
-    let newUser ={
+    let newUser = {
       id: u.uid,
       name: u.displayName,
-      avatar: u.photoURL
-    }
-    await api.addUser(newUser)
+      avatar: u.photoURL,
+    };
+    await api.addUser(newUser);
     setUser(newUser);
-    window.localStorage.setItem('user', JSON.stringify(newUser))
-  }
+    window.localStorage.setItem("user", JSON.stringify(newUser));
+  };
 
-  if(user === null) return <Login onReceive={handleLoginData}/>
+  if (user === null) return <Login onReceive={handleLoginData} />;
   return (
     <AppWindow>
       <SideBar>
@@ -76,7 +75,7 @@ const App = () => {
       </SideBar>
       <ContentArea>
         {activeChat.chatId !== undefined ? (
-          <ChatWindow user={user} />
+          <ChatWindow user={user} data={activeChat} />
         ) : (
           <ChatIntro />
         )}
