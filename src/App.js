@@ -16,26 +16,18 @@ import { Login } from "./components/Login/Login";
 import api from "./api/api";
 
 const App = () => {
-  const [chatList, setChatList] = React.useState([
-    {
-      chatId: 1,
-      title: "Fulano de Tal 1 ",
-      image: "https://www.w3schools.com/howto/img_avatar.png",
-    },
-    {
-      chatId: 2,
-      title: "Fulano de Tal 2 ",
-      image: "https://www.w3schools.com/howto/img_avatar.png",
-    },
-    {
-      chatId: 3,
-      title: "Fulano de Tal 3 ",
-      image: "https://www.w3schools.com/howto/img_avatar.png",
-    },
-  ]);
+  const [chatList, setChatList] = React.useState([]);
   const [activeChat, setActiveChat] = React.useState({});
   const [user, setUser] = React.useState(null);
   const [activeNewChat, setActiveNewChat] = React.useState(false);
+
+  React.useEffect(() => {
+    const user = window.localStorage.getItem('user')
+    const userJson = JSON.parse(user)
+    if(userJson){
+      setUser(userJson)
+    }
+  }, [])
 
   const handleLoginData = async (u) => {
     let newUser ={
@@ -45,6 +37,7 @@ const App = () => {
     }
     await api.addUser(newUser)
     setUser(newUser);
+    window.localStorage.setItem('user', JSON.stringify(newUser))
   }
 
   if(user === null) return <Login onReceive={handleLoginData}/>
