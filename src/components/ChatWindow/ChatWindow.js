@@ -30,6 +30,7 @@ const ChatWindow = ({ user, data }) => {
   const [text, setText] = React.useState("");
   const [listening, setListening] = React.useState(false);
   const [list, setList] = React.useState([]);
+  const [users, setUsers] = React.useState([]);
 
   const body = React.useRef();
 
@@ -43,7 +44,7 @@ const ChatWindow = ({ user, data }) => {
 
   React.useEffect(() => {
     setList([]);
-    let unsub = api.onChatContent(data.chatId, setList);
+    let unsub = api.onChatContent(data.chatId, setList, setUsers);
     return unsub;
   }, [data.chatId]);
 
@@ -64,7 +65,20 @@ const ChatWindow = ({ user, data }) => {
     setEmojiOpen(false);
   }
 
-  function handleSendClick() {}
+  function handleSendClick() {
+    if (text !== "") {
+      api.sendMessage(data, user.id, "text", text, users);
+      setText("");
+      setEmojiOpen(false);
+    }
+  }
+
+  function handleInputKeyUp(event) {
+    if (event.keyCode == 13) {
+      handleSendClick();
+    }
+  }
+
   function handleMicClick() {
     if (recognition !== null) {
       recognition.onstart = () => {
@@ -128,6 +142,7 @@ const ChatWindow = ({ user, data }) => {
             placeholder="Digite uma mensagem"
             value={text}
             onChange={({ target }) => setText(target.value)}
+            onKeyUp={handleInputKeyUp}
           />
         </InputWrapper>
         <ButtonsWrapperFooter>
