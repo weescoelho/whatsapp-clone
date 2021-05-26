@@ -38,7 +38,7 @@ const App = () => {
       }
     }
     getChatList();
-}, [])
+}, [user])
 
   const handleLoginData = async (u) => {
     let newUser ={
